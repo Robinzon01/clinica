@@ -47,14 +47,14 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Override
 	public void deleteDoctor(Long id) {
 		// TODO Auto-generated method stub
-		
+		doctorRepository.delete(findById(id));
 	}
 
 	@Override
 	public Doctor findById(Long id) {
 		Optional<Doctor> doctor = doctorRepository.findById(id);
 		if (!doctor.isPresent()) {
-            throw new ResourceNotFoundException("There is no Article with ID = " + id);
+            throw new ResourceNotFoundException("El codigo de Doctor no valido = " + id);
         }
 
 		return doctor.get();
