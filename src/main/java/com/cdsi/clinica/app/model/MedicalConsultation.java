@@ -1,34 +1,45 @@
 package com.cdsi.clinica.app.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="medicalconsultation")
-public class MedicalConsultation {
+public class MedicalConsultation implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
 	
 	private Date createdate;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "id_doc")
-	private Doctor doctor;
+	@NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_doc", insertable=false, updatable=false)
+    private Doctor doctor;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "id_pat")
-	private Patient patient;
-	
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_pat", insertable=false, updatable=false)
+    private Patient patient;
+	/*
 	public MedicalConsultation() {
 	}
 
@@ -37,7 +48,7 @@ public class MedicalConsultation {
 		this.doctor = doctor;
 		this.patient = patient;
 	}
-
+*/
 	public Long getId() {
 		return id;
 	}
