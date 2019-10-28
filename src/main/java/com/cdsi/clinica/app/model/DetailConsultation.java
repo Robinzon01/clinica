@@ -1,5 +1,6 @@
 package com.cdsi.clinica.app.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
+@Entity(name="detailconsultation")
 @Table(name="detailconsultation")
-public class DetailConsultation {
+public class DetailConsultation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
@@ -21,19 +29,28 @@ public class DetailConsultation {
 	private String diagnostic;
 	@Size(min=2, max=200, message="Ingrese el tratamiento")
 	private String treatment;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id_med_con")
-	private List<MedicalConsultation> medicalConsultation;
+	
+	@NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_med_con", insertable=false, updatable=false)
+    private MedicalConsultation medicalConsultation;
 	
 	public DetailConsultation() {
 	}
 	
-	public DetailConsultation(@Size(min = 2, max = 200, message = "Ingrese el Diagnostico") String diagnostic,
+	public DetailConsultation(Long id, @Size(min = 2, max = 200, message = "Ingrese el Diagnostico") String diagnostic,
 			@Size(min = 2, max = 200, message = "Ingrese el tratamiento") String treatment,
-			List<MedicalConsultation> medicalConsultation) {
+			@NotNull MedicalConsultation medicalConsultation) {
+		
+		this.id = id;
 		this.diagnostic = diagnostic;
 		this.treatment = treatment;
 		this.medicalConsultation = medicalConsultation;
 	}
+
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -52,11 +69,16 @@ public class DetailConsultation {
 	public void setTreatment(String treatment) {
 		this.treatment = treatment;
 	}
-	public List<MedicalConsultation> getMedicalConsultation() {
+
+
+	public MedicalConsultation getMedicalConsultation() {
 		return medicalConsultation;
 	}
-	public void setMedicalConsultation(List<MedicalConsultation> medicalConsultation) {
+
+
+	public void setMedicalConsultation(MedicalConsultation medicalConsultation) {
 		this.medicalConsultation = medicalConsultation;
 	}
+
 
 }

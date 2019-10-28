@@ -15,7 +15,12 @@ public class LoginController {
 
 	@GetMapping(value = { "/login" })
 	public String login(@RequestParam(value = "error", required = false) String error,
+<<<<<<< HEAD
 			@RequestParam(value = "logout", required = false) String logout, Model model, Principal principal,
+=======
+			@RequestParam(value = "logout", required = false) String logout,
+			Model model, Principal principal,
+>>>>>>> dc86e82f23e87a81766a48d68c93047710a78115
 			RedirectAttributes flash) {
 
 		if (principal != null) {
@@ -33,4 +38,8 @@ public class LoginController {
 
 		return "login";
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> dc86e82f23e87a81766a48d68c93047710a78115
 }
