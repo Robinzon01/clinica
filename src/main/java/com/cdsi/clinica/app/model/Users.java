@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -25,12 +24,13 @@ public class Users implements Serializable {
 	private String userName;
 
 	
-	@Column(name = "password",length = 100, unique = true)
+	@Column(name = "password",length = 500, unique = true)
 	private String password;
 
 	private Boolean enabled;
+	
+	private Long user_id;
     
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", insertable=false, updatable=false)
     private Role role;
@@ -80,6 +80,14 @@ public class Users implements Serializable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
     
-    
+  
 }
