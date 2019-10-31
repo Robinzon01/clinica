@@ -17,8 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cdsi.clinica.app.common.PageInitPagMediConsult;
 import com.cdsi.clinica.app.service.IMedicalConsultationService;
 
-
-
 @Controller
 @RequestMapping({ "/", "/home" })
 
@@ -32,24 +30,29 @@ public class HomeController {
 	private PageInitPagMediConsult pegIntPagMediConsul;
 
 	protected static final String INDEX_VIEW = "index"; // articles with pagination
+	//MANTENIMIENTOS
+	protected static final String SPECIALTY_ALL = "specialty/showSpecialty";
+	protected static final String DOCTOR_ALL = "doctor/showDoctor";
+	protected static final String PATIENT_ALL = "patient/showPatient";
+	//CONSULTA MEDICA
+	protected static final String MEDCON_NEW = "medCon/newMedCon";
+	protected static final String MEDCON_ALL = "medCon/showMedCon";
 
-	protected static final String ARTICLE_VIEW = "consultMedica/showConsultMedi"; // view template for single article
-
-	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')")
 	@GetMapping
 	public ModelAndView getIndex(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page) {
 		ModelAndView modelAndView = pegIntPagMediConsul.initPagination(pageSize, page, INDEX_VIEW);
 		return modelAndView;
 	}
-
+    /*
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/{id}")
 	public String getArticleById(@PathVariable(value = "id") Long articleId, Model model) {
 		//model.addAttribute("article", medicalConsulService.findById(articleId));
 		return ARTICLE_VIEW;
 	}
-
+    */
 
 	@GetMapping("/access-denied")
     public String accessDenied() {
