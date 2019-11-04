@@ -40,6 +40,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		objDoctor.setLastname(doctor.getLastname());
 		objDoctor.setDni(doctor.getDni());
 		objDoctor.setCmp(doctor.getCmp());
+		objDoctor.setId_spe(doctor.getId_spe());
 		doctorRepository.save(objDoctor);
 		return objDoctor;
 	}

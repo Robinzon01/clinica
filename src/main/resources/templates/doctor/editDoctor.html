@@ -63,7 +63,7 @@
 							    <select th:field="*{id_spe}" class="browser-default custom-select">
 							      <option th:each="specialt : ${specialtList}" th:value="${specialt.id}" th:text="${specialt.name}"></option>							       
 							    </select>								
-<!-- 								<span class="text-danger errorMsg" th:if="${#fields.hasErrors('id_spe')}" th:errors="*{id_spe}"></span> -->
+ 								<span class="text-danger errorMsg" th:if="${#fields.hasErrors('id_spe')}" th:errors="*{id_spe}"></span>
 							</div>
 
 							<button type="submit" class="btn btn-dark">GUARDAR</button>

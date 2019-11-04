@@ -100,20 +100,17 @@ public class DoctorController {
 	
 	@Secured({"ROLE_ADMIN"})
 	@PostMapping(path = "/{id}/update")
-	public String updateArticle(@PathVariable(value = "id") Long id, @Valid Doctor doctor,
-			BindingResult result, Model model, RedirectAttributes attr) {
+	public String updateArticle(@PathVariable(value = "id") Long id, @Valid Doctor doctor, BindingResult result, Model model, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			/// After the redirect: flash attributes pass attributes to the model
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.doctor", result);
 			attr.addFlashAttribute("doctor", doctor);
-
 			attr.addFlashAttribute("error", "No se permite Especialidades con el mismo codigo");
-
 			return "redirect:/doctor/" + doctor.getId() + "/edit";
 		}
 
 		doctorService.updateDoctor(id, doctor);
-		model.addAttribute("doctor", doctorService.findById(id));
+		//model.addAttribute("doctor", doctorService.findById(id));
 		//return "redirect:/specialty/" + id;
 		return "redirect:/doctor";
 	}
