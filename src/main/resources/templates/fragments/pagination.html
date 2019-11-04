@@ -1,48 +1,35 @@
 <div class="row">
 					<div class="col-md-8 offset-md-2 col-sm-12">
-						<!--include if you want to select pagesize: 5,10 -->
-						<!--
-                    <div>
-                        <select id="pageSizeSelect">
-                            <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
-                                    th:value="${pageSize}"
-                                    th:selected="${pageSize} == ${selectedPageSize}"></option>
-                        </select>
-                    </div>-->
-
-
-						<div th:if="${articlesList.totalPages != 1}" class="section">
+						<div th:if="${specialtList.totalPages != 1}" class="section">
 							<ul class="pagination pagination-primary">
 								<li class="page-item"
-									th:class="${articlesList.number == 0} ? disabled"><a
+									th:class="${specialtList.number == 0} ? disabled"><a
 									class="page-link"
-									th:href="@{/articles/(pageSize=${selectedPageSize}, page=1)}">«</a></li>
+									th:href="@{/specialty/(pageSize=${selectedPageSize}, page=1)}">  <i class="fas fa-angle-double-left"></i>  </a></li>
 								<li class="page-item"
-									th:class="${articlesList.number == 0} ? disabled"><a
+									th:class="${specialtList.number == 0} ? disabled"><a
 									class="page-link"
-									th:href="@{/articles/(pageSize=${selectedPageSize}, page=${articlesList.number})}">←</a>
+									th:href="@{/specialty/(pageSize=${selectedPageSize}, page=${specialtList.number})}"> <i class="fas fa-angle-left"></i> </a>
 								</li>
 								<li
-									th:class="${articlesList.number == (page - 1)} ? 'active page-item'"
+									th:class="${specialtList.number == (page - 1)} ? 'active page-item'"
 									th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
 									<a class="page-link"
-									th:href="@{/articles/(pageSize=${selectedPageSize}, page=${page})}"
+									th:href="@{/specialty/(pageSize=${selectedPageSize}, page=${page})}"
 									th:text="${page}"></a>
 								</li>
 								<li class="page-item"
-									th:class="${articlesList.number + 1 == articlesList.totalPages} ? disabled">
+									th:class="${specialtList.number + 1 == specialtList.totalPages} ? disabled">
 									<a class="page-link"
-									th:href="@{/articles/(pageSize=${selectedPageSize}, page=${articlesList.number + 2})}">→</a>
+									th:href="@{/specialty/(pageSize=${selectedPageSize}, page=${specialtList.number + 2})}"> <i class="fas fa-angle-right"></i> </a>
 								</li>
 								<li class="page-item"
-									th:class="${articlesList.number + 1 == articlesList.totalPages} ? disabled">
+									th:class="${specialtList.number + 1 == specialtList.totalPages} ? disabled">
 									<a class="page-link"
-									th:href="@{/articles/(pageSize=${selectedPageSize}, page=${articlesList.totalPages})}">»</a>
+									th:href="@{/specialty/(pageSize=${selectedPageSize}, page=${specialtList.totalPages})}"> <i class="fas fa-angle-double-right"></i> </a>
 								</li>
 							</ul>
 						</div>
-
-
 
 					</div>
 				</div>

@@ -1,24 +1,17 @@
 package com.cdsi.clinica.app.model;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-@Entity(name="doctor")
+@Entity
 @Table(name="doctor")
-public class Doctor implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Doctor {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -35,20 +28,24 @@ public class Doctor implements Serializable {
     
     private String cmp;
     
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_spe")
+    private Long id_spe;
+       
+    @ManyToOne
+    @JoinColumn(name = "id_spe", insertable=false, updatable=false)
     private Specialty specialty;
 
 	public Doctor() {}
 
-	public Doctor(@Size(min = 2, max = 100, message = "Ingrese el Nombre") String firstname,
+	public Doctor(Long id, @Size(min = 2, max = 100, message = "Ingrese el Nombre") String firstname,
 			@Size(min = 2, max = 100, message = "Ingrese el Apellido") String lastname,
-			@Size(max = 8, message = "Ingrese el DNI") String dni, String cmp, Specialty specialty) {
+			@Size(max = 8, message = "Ingrese el DNI") String dni, String cmp, Long id_spe) {
+		super();
+		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.dni = dni;
 		this.cmp = cmp;
-		this.specialty = specialty;
+		this.id_spe = id_spe;
 	}
 
 	public Long getId() {
@@ -90,13 +87,21 @@ public class Doctor implements Serializable {
 	public void setCmp(String cmp) {
 		this.cmp = cmp;
 	}
+	
+	public Long getId_spe() {
+		return id_spe;
+	}
+
+	public void setId_spe(Long id_spe) {
+		this.id_spe = id_spe;
+	}
 
 	public Specialty getSpecialty() {
 		return specialty;
 	}
-
 	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
-	}  
+	}
+
     
 }

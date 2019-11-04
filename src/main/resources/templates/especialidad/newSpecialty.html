@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>NUEVA ESPECIALIDAD</h2>
+						</div>
+
+						<form th:object="${specialty}" th:action="@{/specialty/create}" th:method="post">
+							
+							<div class="alert alert-danger" th:if="${error!=null}"
+								th:text="${error}"></div>
+							
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+							</div>
+							
+
+							<div class="form-group">
+								<input placeholder="Escribe la nueva Especialidad" th:field="*{name}" id="name" type="text"
+									class="form-control validate"> <label for="author">Especialidad</label>
+								<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+							</div>							
+
+							<button type="submit" class="btn btn-dark">Guardar</button>
+							<a class="btn btn-primary" th:href="@{'/specialty'}">Cancelar</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

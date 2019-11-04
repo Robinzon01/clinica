@@ -26,8 +26,8 @@ class TrabajoMitocodeClinicaApplicationTests {
        // Optional<Role> objR = roleRepo.findById(1L);
 		Users objU = new Users();
 		//objU.setId(1L);
-		objU.setPassword( encorder.encode("gen") ); // rsl -- 123
-		objU.setUserName("gen");
+		objU.setPassword( encorder.encode("GEN") ); // rsl -- 123
+		objU.setUserName("GEN");
 		objU.setEnabled(true);
 		objU.setUser_id(2L);
 		
