@@ -1,0 +1,35 @@
+<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div th:if="${patientList.totalPages != 1}" class="section">
+							<ul class="pagination pagination-primary">
+								<li class="page-item"
+									th:class="${patientList.number == 0} ? disabled"><a
+									class="page-link"
+									th:href="@{/patient/(pageSize=${selectedPageSize}, page=1)}">  <i class="fas fa-angle-double-left"></i>  </a></li>
+								<li class="page-item"
+									th:class="${patientList.number == 0} ? disabled"><a
+									class="page-link"
+									th:href="@{/patient/(pageSize=${selectedPageSize}, page=${patientList.number})}"> <i class="fas fa-angle-left"></i> </a>
+								</li>
+								<li
+									th:class="${patientList.number == (page - 1)} ? 'active page-item'"
+									th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+									<a class="page-link"
+									th:href="@{/patient/(pageSize=${selectedPageSize}, page=${page})}"
+									th:text="${page}"></a>
+								</li>
+								<li class="page-item"
+									th:class="${patientList.number + 1 == patientList.totalPages} ? disabled">
+									<a class="page-link"
+									th:href="@{/patient/(pageSize=${selectedPageSize}, page=${patientList.number + 2})}"> <i class="fas fa-angle-right"></i> </a>
+								</li>
+								<li class="page-item"
+									th:class="${patientList.number + 1 == patientList.totalPages} ? disabled">
+									<a class="page-link"
+									th:href="@{/patient/(pageSize=${selectedPageSize}, page=${patientList.totalPages})}"> <i class="fas fa-angle-double-right"></i> </a>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+</div>

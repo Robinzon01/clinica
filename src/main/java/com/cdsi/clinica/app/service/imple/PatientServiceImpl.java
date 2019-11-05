@@ -41,7 +41,7 @@ public class PatientServiceImpl implements IPatientService {
 		objP.setFirstname(patient.getFirstname());
 		objP.setLastname(patient.getLastname());
 		objP.setDni(patient.getDni());
-		objP.setNumberclinicalhistory(patient.getNumberclinicalhistory());
+		objP.setHistoria(patient.getHistoria());
 		
 		patientRepo.save(objP);
 		

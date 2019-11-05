@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>EDITAR PACIENTE</h2>
+						</div>
+
+						<form th:object="${patient}" th:action="@{/patient/{id}/update(id=${patient.id})}" th:method="post">
+
+							<div class="alert alert-danger" th:if="${error!=null}"
+								th:text="${error}"></div>
+
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+							</div>
+
+							<div class="form-group invisible">
+								<input th:field="*{id}" id="id" type="text"
+									class="form-control validate"> <label for="id">Id</label>
+							</div>
+
+							<div class="form-group">
+								<input th:field="*{dni}" id="dni" type="number"
+									class="form-control validate"> <label for="dni">DNI</label>
+								<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{firstname}" id="firstname" type="text"
+									class="form-control validate"> <label for="firstname">NOMBRE(S)</label>
+								<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{lastname}" id="lastname" type="text"
+									class="form-control validate"> <label for="lastname">APELLIDOS</label>
+								<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+							</div>
+														
+							<div class="form-group">
+								<input th:field="*{historia}" id="historia" type="text"
+									class="form-control validate"> <label for="historia">HISTORIA CLINICA</label>
+								<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('historia')}" th:errors="*{historia}"></span>
+							</div>				
+
+							<button type="submit" class="btn btn-dark">GUARDAR</button>
+							<a class="btn btn-primary" th:href="@{'/patient'}">CANCELAR</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

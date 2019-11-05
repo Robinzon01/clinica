@@ -1,7 +1,5 @@
 package com.cdsi.clinica.app.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,39 +7,43 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-@Entity(name="patient")
+@Entity
 @Table(name="patient")
-public class Patient implements Serializable {
+public class Patient {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
+	
 	@Size(min=2, max=100, message="Ingrese el Nombre")
 	private String firstname;
+	
 	@Size(min=2, max=100, message="Ingrese el Apellido")
 	private String lastname;
+	
 	@Size(max=8, message="Ingrese el DNI")
 	private String dni;
-	@Size(min=2, max=100, message="Ingrese la historia clinica")
-	private String numberclinicalhistory;
+	
+	private String historia;
 	
 	public Patient() {
 	}
 
-	public Patient( @Size(min = 2, max = 100, message = "Ingrese el Nombre") String firstname,
+
+	public Patient(Long id, @Size(min = 2, max = 100, message = "Ingrese el Nombre") String firstname,
 			@Size(min = 2, max = 100, message = "Ingrese el Apellido") String lastname,
 			@Size(max = 8, message = "Ingrese el DNI") String dni,
-			@Size(min = 2, max = 100, message = "Ingrese la historia clinica") String numberclinicalhistory) {
-
+			@Size(min = 2, max = 100, message = "Ingrese la historia clinica") String historia) {
+		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.dni = dni;
-		this.numberclinicalhistory = numberclinicalhistory;
+		this.historia = historia;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -66,13 +68,17 @@ public class Patient implements Serializable {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	public String getNumberclinicalhistory() {
-		return numberclinicalhistory;
+
+
+	public String getHistoria() {
+		return historia;
 	}
-	public void setNumberclinicalhistory(String numberclinicalhistory) {
-		this.numberclinicalhistory = numberclinicalhistory;
+
+
+	public void setHistoria(String historia) {
+		this.historia = historia;
 	}
-	
-	
+
+		
 	
 }
